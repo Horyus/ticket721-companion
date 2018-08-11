@@ -1,8 +1,10 @@
 import React from 'react';
+import {Font} from 'expo';
 
-import {Home} from "./src/views/home";
+import {Home} from "./src/views/introduction/home";
 
 import {Welcome} from "./src/views/introduction/welcome";
+import {Explainer1} from "./src/views/introduction/welcome/explainer1";
 
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux';
@@ -32,6 +34,9 @@ const IntroNavigator = createStackNavigator(
     {
         Welcome: {
             screen: Welcome
+        },
+        Explainer1: {
+            screen: Explainer1
         },
         App: {
             screen: AppNavigator
@@ -90,6 +95,16 @@ Store.dispatch(WalletLoad());
 
 // Export Default Root class
 export default class Root extends React.Component {
+    componentDidMount() {
+        Font.loadAsync({
+            RobotoThin: require('./assets/fonts/Roboto/Roboto-Thin.ttf'),
+            RobotoLight: require('./assets/fonts/Roboto/Roboto-Light.ttf'),
+            Roboto: require('./assets/fonts/Roboto/Roboto-Regular.ttf'),
+            RobotoMedium: require('./assets/fonts/Roboto/Roboto-Medium.ttf'),
+            RobotoBlack: require('./assets/fonts/Roboto/Roboto-Black.ttf')
+        })
+    };
+
     render() {
         return (
             <Provider store={Store}>

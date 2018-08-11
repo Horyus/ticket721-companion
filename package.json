@@ -19,9 +19,11 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo/vector-icons": "^6.3.1",
     "ethers": "^3.0.26",
     "expo": "^27.0.1",
     "lottie-react-native": "^2.5.6",
+    "native-base": "^2.7.2",
     "pouchdb-adapter-asyncstorage": "^6.4.1",
     "react": "16.3.1",
     "react-native": "~0.55.2",
