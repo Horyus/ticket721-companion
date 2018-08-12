@@ -3,12 +3,12 @@ import {View, StyleSheet, Dimensions} from 'react-native';
 import {Container, Content, Grid, Col, Button, Text} from 'native-base';
 
 const text = `
-With this application, you can generate QR Codes for your Ticket721 tickets.
-These QR Codes can be scanned at the events your are going to attend, and will
-certify your ownership of a ticket.
+We will need to create a Wallet for you. A Wallet is a unique identity, and you're the only one controlling it.
 
-It is important to follow all the steps to setup your Ticket721 Companion, and
-link it with your Ticket721 Webapp.
+In Ethereum, a Wallet allows you to spend Ethers, but in the Ticket721 Companion, we're not going to use the Wallet
+to spend Ethers. 
+
+This Wallet is only going to be used to create Cryptographically Secured Digital Signatures.
 `;
 
 const styles = StyleSheet.create({
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export class Explainer1 extends React.Component {
+export class Explainer2 extends React.Component {
     render() {
         return (
             <Container>
@@ -45,9 +45,9 @@ export class Explainer1 extends React.Component {
                                 </Text>
                                 <View style={styles.buttonview}>
                                     <Button rounded bordered info small onPress={() => {
-                                        this.props.navigation.navigate('Explainer2');
+                                        this.props.navigation.navigate('Explainer3');
                                     }}>
-                                        <Text>Ok, I got it !</Text>
+                                        <Text>Cryptographically what ??</Text>
                                     </Button>
                                 </View>
                             </Col>

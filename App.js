@@ -5,6 +5,9 @@ import {Home} from "./src/views/introduction/home";
 
 import {Welcome} from "./src/views/introduction/welcome";
 import {Explainer1} from "./src/views/introduction/welcome/explainer1";
+import {Explainer2} from "./src/views/introduction/welcome/explainer2";
+import {Explainer3} from "./src/views/introduction/welcome/explainer3";
+import {Generator} from "./src/views/introduction/welcome/generator";
 
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux';
@@ -33,10 +36,34 @@ const AppNavigator = createBottomTabNavigator(
 const IntroNavigator = createStackNavigator(
     {
         Welcome: {
-            screen: Welcome
+            screen: Welcome,
+            navigationOptions: {
+                gesturesEnabled: false,
+            }
         },
         Explainer1: {
-            screen: Explainer1
+            screen: Explainer1,
+            navigationOptions: {
+                gesturesEnabled: false,
+            }
+        },
+        Explainer2: {
+            screen: Explainer2,
+            navigationOptions: {
+                gesturesEnabled: false,
+            }
+        },
+        Explainer3: {
+            screen: Explainer3,
+            navigationOptions: {
+                gesturesEnabled: false,
+            }
+        },
+        Generator: {
+            screen: Generator,
+            navigationOptions: {
+                gesturesEnabled: false,
+            }
         },
         App: {
             screen: AppNavigator
@@ -44,7 +71,8 @@ const IntroNavigator = createStackNavigator(
     },
     {
         initialRouteName: 'Welcome',
-        headerMode: 'none'
+        headerMode: 'none',
+        gesturesEnabled: false
     }
 );
 
@@ -101,7 +129,8 @@ export default class Root extends React.Component {
             RobotoLight: require('./assets/fonts/Roboto/Roboto-Light.ttf'),
             Roboto: require('./assets/fonts/Roboto/Roboto-Regular.ttf'),
             RobotoMedium: require('./assets/fonts/Roboto/Roboto-Medium.ttf'),
-            RobotoBlack: require('./assets/fonts/Roboto/Roboto-Black.ttf')
+            RobotoBlack: require('./assets/fonts/Roboto/Roboto-Black.ttf'),
+            RobotoMono: require('./assets/fonts/RobotoMono/RobotoMono-Regular.ttf')
         })
     };
 

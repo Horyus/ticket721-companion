@@ -1,5 +1,5 @@
 import {takeEvery, call, take, put} from "redux-saga/effects";
-import {WalletActionType, WalletError, WalletLoaded, WalletMissing} from "./wallet.actions";
+import {WalletActionType, WalletError, WalletLoaded, WalletMissing, WalletGenerated} from "./wallet.actions";
 import {END, eventChannel} from "redux-saga";
 import {load} from "../../rxdb";
 import {Wallet} from 'ethers';
@@ -43,6 +43,38 @@ function* Wallet_Load(_) {
 
 }
 
+function* Wallet_Generate_eventChannel() {
+    return eventChannel((emit) => {
+        setTimeout(() => {
+            try {
+                const wallet = Wallet.createRandom();
+                emit(WalletGenerated(wallet, wallet.mnemonic.split(' ')));
+                emit(END);
+            } catch (e) {
+                emit(WalletError());
+                emit(END);
+            }
+        }, 500);
+
+        return () => {};
+    })
+}
+
+function* Wallet_Generate(_) {
+    const WGec = yield call(Wallet_Generate_eventChannel);
+
+    try {
+        while (true) {
+            const event = yield take(WGec);
+            yield put(event);
+        }
+    } finally {
+        WGec.close();
+    }
+
+}
+
 export function* walletSagas() {
     yield takeEvery(WalletActionType.Wallet_Load, Wallet_Load);
+    yield takeEvery(WalletActionType.Wallet_Generate, Wallet_Generate);
 }

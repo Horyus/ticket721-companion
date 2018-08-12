@@ -40,6 +40,8 @@ export class _Welcome extends React.Component {
         switch (this.props.wallet.status) {
             case 'NONE':
                 return (<Loading/>);
+            case 'GENERATING':
+            case 'GENERATED':
             case 'NO_WALLET':
                 return (
                     <Container>

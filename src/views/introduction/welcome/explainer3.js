@@ -3,12 +3,13 @@ import {View, StyleSheet, Dimensions} from 'react-native';
 import {Container, Content, Grid, Col, Button, Text} from 'native-base';
 
 const text = `
-With this application, you can generate QR Codes for your Ticket721 tickets.
-These QR Codes can be scanned at the events your are going to attend, and will
-certify your ownership of a ticket.
+Don't worry ! You don't have to go into details !
 
-It is important to follow all the steps to setup your Ticket721 Companion, and
-link it with your Ticket721 Webapp.
+All you need to know is that to generate such a Wallet, we need 12 random words.
+
+It is very important to note down these 12 words, as we're not going to store them for you, and they will be the only way for you to restore this Wallet if you lose it !
+
+Are you ready to generate the Wallet and note these 12 words ?
 `;
 
 const styles = StyleSheet.create({
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export class Explainer1 extends React.Component {
+export class Explainer3 extends React.Component {
     render() {
         return (
             <Container>
@@ -45,9 +46,9 @@ export class Explainer1 extends React.Component {
                                 </Text>
                                 <View style={styles.buttonview}>
                                     <Button rounded bordered info small onPress={() => {
-                                        this.props.navigation.navigate('Explainer2');
+                                        this.props.navigation.navigate('Generator');
                                     }}>
-                                        <Text>Ok, I got it !</Text>
+                                        <Text>Generate the Wallet</Text>
                                     </Button>
                                 </View>
                             </Col>

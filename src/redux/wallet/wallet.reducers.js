@@ -21,10 +21,15 @@ export const walletReducers = (state = {status: 'NONE'}, action) => {
         case WalletActionType.Wallet_Generated:
             return {
                 ...state,
-                status: 'READY',
+                status: 'GENERATED',
                 wallet: action.wallet,
                 mnemonic: action.mnemonic
             };
+        case WalletActionType.Wallet_Ready:
+            return {
+                ...state,
+                status: 'READY'
+            }
     }
     return state;
 };
