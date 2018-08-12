@@ -16,6 +16,8 @@ function* Wallet_Load_eventChannel() {
 
         load().then(async rxdb => {
 
+            //await rxdb.wallet.find().remove();
+
             const wallet = await rxdb.wallet.find().exec();
 
             if (!wallet) {

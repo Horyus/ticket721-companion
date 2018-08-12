@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
     },
     buttonview: {
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginBottom: 40
     }
 });
 
@@ -68,6 +69,13 @@ export class _Welcome extends React.Component {
                                                 this.props.navigation.navigate('Explainer1');
                                             }}>
                                                 <Text>Setup</Text>
+                                            </Button>
+                                        </View>
+                                        <View style={styles.buttonview}>
+                                            <Button rounded bordered info small onPress={() => {
+                                                this.props.navigation.navigate('Recovery');
+                                            }}>
+                                                <Text>Recover Wallet</Text>
                                             </Button>
                                         </View>
                                     </Col>

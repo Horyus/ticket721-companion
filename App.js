@@ -7,6 +7,7 @@ import getTheme from './native-base-theme/components';
 import {StyleProvider} from 'native-base';
 
 import {Welcome} from "./src/views/introduction/welcome";
+import {Recovery} from "./src/views/introduction/welcome/recovery";
 import {Explainer1} from "./src/views/introduction/welcome/explainer1";
 import {Explainer2} from "./src/views/introduction/welcome/explainer2";
 import {Explainer3} from "./src/views/introduction/welcome/explainer3";
@@ -42,6 +43,12 @@ const IntroNavigator = createStackNavigator(
     {
         Welcome: {
             screen: Welcome,
+            navigationOptions: {
+                gesturesEnabled: false,
+            }
+        },
+        Recovery: {
+            screen: Recovery,
             navigationOptions: {
                 gesturesEnabled: false,
             }
