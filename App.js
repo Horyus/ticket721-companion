@@ -3,11 +3,16 @@ import {Font} from 'expo';
 
 import {Home} from "./src/views/introduction/home";
 
+import getTheme from './native-base-theme/components';
+import {StyleProvider} from 'native-base';
+
 import {Welcome} from "./src/views/introduction/welcome";
 import {Explainer1} from "./src/views/introduction/welcome/explainer1";
 import {Explainer2} from "./src/views/introduction/welcome/explainer2";
 import {Explainer3} from "./src/views/introduction/welcome/explainer3";
 import {Generator} from "./src/views/introduction/welcome/generator";
+import {Verifier} from "./src/views/introduction/welcome/verifier";
+import {Ready} from "./src/views/introduction/welcome/ready";
 
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux';
@@ -65,14 +70,30 @@ const IntroNavigator = createStackNavigator(
                 gesturesEnabled: false,
             }
         },
+        Verifier: {
+            screen: Verifier,
+            navigationOptions: {
+                gesturesEnabled: false,
+            }
+        },
+        Ready: {
+            screen: Ready,
+            navigationOptions: {
+                gesturesEnabled: false,
+            }
+        },
         App: {
-            screen: AppNavigator
+            screen: Home,
+            navigationOptions: {
+                gesturesEnabled: false,
+            }
         }
     },
     {
         initialRouteName: 'Welcome',
         headerMode: 'none',
-        gesturesEnabled: false
+        gesturesEnabled: false,
+        cardStyle: { backgroundColor: '#FFFFFF' }
     }
 );
 
@@ -137,7 +158,9 @@ export default class Root extends React.Component {
     render() {
         return (
             <Provider store={Store}>
-                <AppWithNavigationState/>
+                <StyleProvider style={getTheme()}>
+                    <AppWithNavigationState/>
+                </StyleProvider>
             </Provider>
         );
     }

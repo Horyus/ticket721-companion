@@ -1,5 +1,12 @@
-import {takeEvery, call, take, put} from "redux-saga/effects";
-import {WalletActionType, WalletError, WalletLoaded, WalletMissing, WalletGenerated} from "./wallet.actions";
+import {takeEvery, call, take, put, select} from "redux-saga/effects";
+import {
+    WalletActionType,
+    WalletError,
+    WalletLoaded,
+    WalletMissing,
+    WalletGenerated,
+    WalletReady
+} from "./wallet.actions";
 import {END, eventChannel} from "redux-saga";
 import {load} from "../../rxdb";
 import {Wallet} from 'ethers';
@@ -8,6 +15,7 @@ function* Wallet_Load_eventChannel() {
     return eventChannel((emit) => {
 
         load().then(async rxdb => {
+
             const wallet = await rxdb.wallet.find().exec();
 
             if (!wallet) {
@@ -74,7 +82,35 @@ function* Wallet_Generate(_) {
 
 }
 
+function* Wallet_Save_eventChannel() {
+    const state = yield select();
+    return eventChannel((emit) => {
+        load().then(async rxdb => {
+            await rxdb.wallet.insert({
+                privateKey: state.wallet.wallet.privateKey
+            });
+            emit(WalletReady());
+            emit(END);
+        });
+        return () => {};
+    })
+}
+
+function* Wallet_Save(_) {
+    const WSec = yield call(Wallet_Save_eventChannel);
+
+    try {
+        while (true) {
+            const event = yield take(WSec);
+            yield put(event);
+        }
+    } finally {
+        WSec.close();
+    }
+}
+
 export function* walletSagas() {
     yield takeEvery(WalletActionType.Wallet_Load, Wallet_Load);
     yield takeEvery(WalletActionType.Wallet_Generate, Wallet_Generate);
+    yield takeEvery(WalletActionType.Wallet_Save, Wallet_Save);
 }

@@ -9,6 +9,7 @@ export let rxdb;
 
 export const load = () => {
     return new Promise(async (ok, ko) => {
+        if (rxdb) return ok(rxdb);
         try {
             rxdb = await RxDB.create({
                 name: databaseName,

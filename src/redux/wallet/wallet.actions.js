@@ -5,7 +5,8 @@ export const WalletActionType = {
     Wallet_Generate: 'WALLET_GENERATE',
     Wallet_Generated: 'WALLET_GENERATED',
     Wallet_Error: 'WALLET_ERROR',
-    Wallet_Ready: 'WALLET_READY'
+    Wallet_Ready: 'WALLET_READY',
+    Wallet_Save: 'WALLET_SAVE'
 };
 
 export const WalletLoad = () => {
@@ -50,5 +51,11 @@ export const WalletGenerated = (wallet, mnemonic) => {
 export const WalletReady = () => {
     return {
         type: WalletActionType.Wallet_Ready
+    }
+};
+
+export const WalletSave = () => {
+    return {
+        type: WalletActionType.Wallet_Save
     }
 };

@@ -33,6 +33,13 @@ const styles = StyleSheet.create({
         marginTop: 30,
         marginBottom: 15
     },
+    lasttext: {
+        textAlign: 'center',
+        fontFamily: 'RobotoThin',
+        fontSize: 17,
+        marginTop: 30,
+        marginBottom: 30
+    },
     grid: {
         alignItems: 'center'
     },
@@ -41,6 +48,10 @@ const styles = StyleSheet.create({
         padding: 6,
         fontFamily: 'RobotoLight',
         fontSize: 15
+    },
+    buttonview: {
+        flexDirection: 'row',
+        justifyContent: 'center'
     }
 });
 
@@ -57,6 +68,7 @@ class _Generator extends React.Component {
         switch(this.props.wallet.status) {
             case 'NO_WALLET':
             case 'GENERATING':
+            case 'READY':
                 return <Loading/>;
             case 'GENERATED':
                 const mnemonic = this.props.wallet.mnemonic;
@@ -82,13 +94,20 @@ class _Generator extends React.Component {
                                         <Text style={styles.addressText}>
                                             {this.props.wallet.wallet.address}
                                         </Text>
-                                        <Table borderStyle={{borderWidth: 1, borderColor: '#404040', padding: 16}}>
+                                        <Table borderStyle={{borderWidth: 1, borderColor: '#121212', padding: 16}}>
                                             <Row data={data.tableHead} style={styles.head} textStyle={styles.tabletext}/>
                                             <Rows data={data.tableData} textStyle={styles.tabletext}/>
                                         </Table>
-                                        <Text style={styles.text}>
+                                        <Text style={styles.lasttext}>
                                             These 12 words are your seed words, be sure to not them somewhere safe
                                         </Text>
+                                        <View style={styles.buttonview}>
+                                            <Button rounded bordered info small onPress={() => {
+                                                this.props.navigation.navigate('Verifier');
+                                            }}>
+                                                <Text>All the words are safely noted !</Text>
+                                            </Button>
+                                        </View>
                                     </Col>
                                 </Grid>
                             </View>

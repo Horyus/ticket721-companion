@@ -1,14 +1,11 @@
 import React from 'react';
-import {Loading} from "../loading/index";
+import {View, StyleSheet, Dimensions} from 'react-native';
+import {Container, Content, Grid, Col, Button, Text} from 'native-base';
+import {WalletSave} from "../../../redux/wallet/wallet.actions";
 import {connect} from 'react-redux';
-import {withNavigation} from 'react-navigation';
-
-import {StyleSheet, View, Dimensions} from 'react-native';
-import { Container, Header, Content, Button, Text, Body, Grid, Col} from 'native-base';
-import { StackActions, NavigationActions } from 'react-navigation';
 
 const text = `
-Welcome to the Ticket721 Companion
+You succesfully created your Wallet !
 `;
 
 const styles = StyleSheet.create({
@@ -32,25 +29,13 @@ const styles = StyleSheet.create({
     }
 });
 
-export class _Welcome extends React.Component {
+class _Ready extends React.Component {
     constructor(props) {
         super(props);
-        this.resetAction = StackActions.reset({
-            index: 0,
-            actions: [NavigationActions.navigate({ routeName: 'App' })],
-        });
-    }
-
-    shouldComponentUpdate(newProps) {
-        if (newProps.wallet.status === 'READY')
-            this.props.navigation.dispatch(this.resetAction);
-        return true;
     }
 
     render() {
-        switch (this.props.wallet.status) {
-            case 'NONE':
-                return (<Loading/>);
+        switch(this.props.status) {
             case 'READY':
                 return null;
             default:
@@ -64,10 +49,10 @@ export class _Welcome extends React.Component {
                                             {text}
                                         </Text>
                                         <View style={styles.buttonview}>
-                                            <Button rounded bordered info small onPress={() => {
-                                                this.props.navigation.navigate('Explainer1');
+                                            <Button rounded bordered success small onPress={() => {
+                                                this.props.save();
                                             }}>
-                                                <Text>Setup</Text>
+                                                <Text>Use Ticket721 Companion</Text>
                                             </Button>
                                         </View>
                                     </Col>
@@ -82,8 +67,14 @@ export class _Welcome extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         ...ownProps,
-        wallet: state.wallet
+        status: state.wallet.status
     }
 };
 
-export const Welcome = withNavigation(connect(mapStateToProps)(_Welcome));
+const mapDispatchToProps = (dispatch) => {
+    return {
+        save: () => {dispatch(WalletSave())}
+    }
+};
+
+export const Ready = connect(mapStateToProps, mapDispatchToProps)(_Ready);

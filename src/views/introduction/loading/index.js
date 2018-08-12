@@ -10,11 +10,11 @@ export class Loading extends React.Component {
         return (
             <LottieView
 
+                style={{backgroundColor: '#ffffff'}}
+
                 ref={animation => (this.animation = animation)}
 
                 source={require('./animation.json')}
-
-                style={{}}
 
                 loop
 
