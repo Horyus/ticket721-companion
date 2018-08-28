@@ -1,5 +1,301 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+    "sdkVersion": "27.0.0",
+    "extra": {
+      "API_URL": "http://192.168.0.6:8080",
+      "BC_URL": "http://192.168.0.6:8545",
+      "T721HUB_ADDRESS": "0xD72bF69ef58467B7fe2b833A3850430b15a46B3a",
+      "T721HUB_ABI": [
+        {
+          "constant": false,
+          "inputs": [
+            {
+              "name": "_idx",
+              "type": "uint256"
+            }
+          ],
+          "name": "eraseController",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "signature": "0x11bd9d9f"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            {
+              "name": "",
+              "type": "address"
+            },
+            {
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "name": "sale_ownership",
+          "outputs": [
+            {
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function",
+          "signature": "0x2c6b445a"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            {
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "name": "verified_ticket_registries",
+          "outputs": [
+            {
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function",
+          "signature": "0x3101cd9b"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            {
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "name": "companions",
+          "outputs": [
+            {
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function",
+          "signature": "0x47854b87"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            {
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "name": "accounts",
+          "outputs": [
+            {
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function",
+          "signature": "0x5e5c06e2"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            {
+              "name": "_companion_address",
+              "type": "address"
+            }
+          ],
+          "name": "setCompanion",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "signature": "0x6653d464"
+        },
+        {
+          "constant": true,
+          "inputs": [],
+          "name": "account_manager",
+          "outputs": [
+            {
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function",
+          "signature": "0x7e330bf5"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            {
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "name": "controller_registered",
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function",
+          "signature": "0x813b499a"
+        },
+        {
+          "constant": true,
+          "inputs": [],
+          "name": "owner",
+          "outputs": [
+            {
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function",
+          "signature": "0x8da5cb5b"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            {
+              "name": "_public",
+              "type": "address"
+            }
+          ],
+          "name": "addPublicRegistry",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "signature": "0xc8ffe84b"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            {
+              "name": "_verified",
+              "type": "address"
+            }
+          ],
+          "name": "addVerifiedRegistry",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "signature": "0xd71b1ba5"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            {
+              "name": "_controller",
+              "type": "address"
+            }
+          ],
+          "name": "registerController",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "signature": "0xd91ae8c2"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            {
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "name": "public_ticket_registries",
+          "outputs": [
+            {
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function",
+          "signature": "0xdf9e74e7"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            {
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "transferOwnership",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "signature": "0xf2fde38b"
+        },
+        {
+          "inputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "constructor",
+          "signature": "constructor"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "sale_address",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "sale_owner",
+              "type": "address"
+            }
+          ],
+          "name": "Sale",
+          "type": "event",
+          "signature": "0x4a5ecc66cc2d8e8cb92baf3f35f91cb59e5e0d99930c200982e7cc688d24c424"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event",
+          "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
+        }
+      ],
+      "BC_CHAIN_ID": 2702,
+      "BC_CHAIN_NAME": "custom"
+    }
   }
 }

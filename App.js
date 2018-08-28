@@ -28,6 +28,13 @@ import {walletReducers} from "./src/redux/wallet/wallet.reducers";
 import {walletSagas} from "./src/redux/wallet/wallet.sagas";
 import {WalletLoad} from "./src/redux/wallet/wallet.actions";
 
+import {configReducers} from "./src/redux/config/config.reducers";
+import {ConfigLoad} from "./src/redux/config/config.actions";
+import {configSagas} from "./src/redux/config/config.sagas";
+
+import {linksReducers} from "./src/redux/links/links.reducers";
+import {linksSagas} from "./src/redux/links/links.sagas";
+
 const AppNavigator = createBottomTabNavigator(
     {
         Home: {
@@ -110,6 +117,8 @@ const navReducer = createNavigationReducer(IntroNavigator);
 // Combining Navigation Reducer and Application Reducers
 const reducer = combineReducers({
     wallet: walletReducers,
+    config: configReducers,
+    links: linksReducers,
     nav: navReducer
 });
 
@@ -119,7 +128,9 @@ const sagaMiddleware = createSagaMiddleware();
 // Creating Saga Combination of Application Sagas
 function* sagas() {
     yield all([
-        fork(walletSagas)
+        fork(walletSagas),
+        fork(configSagas),
+        fork(linksSagas)
     ]);
 }
 
@@ -130,7 +141,8 @@ const navMiddleware = createReactNavigationReduxMiddleware("root", state => stat
 const Store = createStore(reducer, {
     wallet: {
         status: 'NONE'
-    }
+    },
+    config: {}
 }, applyMiddleware(navMiddleware, sagaMiddleware));
 
 // Run Saga Middleware

@@ -10,6 +10,7 @@ import {
 import {END, eventChannel} from "redux-saga";
 import {load} from "../../rxdb";
 import {Wallet} from 'ethers';
+import {ConfigLoad} from "../config/config.actions";
 
 function* Wallet_Load_eventChannel() {
     return eventChannel((emit) => {
@@ -33,6 +34,7 @@ function* Wallet_Load_eventChannel() {
             }
 
             emit(WalletLoaded(new Wallet(wallet[0].privateKey)));
+            emit(ConfigLoad());
             emit(END);
         });
         return () => {};
@@ -92,6 +94,7 @@ function* Wallet_Save_eventChannel() {
                 privateKey: state.wallet.wallet.privateKey
             });
             emit(WalletReady());
+            emit(ConfigLoad());
             emit(END);
         });
         return () => {};

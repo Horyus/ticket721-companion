@@ -2,6 +2,7 @@ import React from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
 import {Container, Content, Grid, Col, Text} from 'native-base';
 import {connect} from 'react-redux';
+import Expo from 'expo';
 
 const styles = StyleSheet.create({
     contentview: {
@@ -49,7 +50,8 @@ class _Home extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         ...ownProps,
-        wallet: state.wallet
+        wallet: state.wallet,
+        config: state.config
     }
 };
 
