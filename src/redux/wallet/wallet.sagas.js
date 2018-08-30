@@ -15,28 +15,32 @@ import {ConfigLoad} from "../config/config.actions";
 function* Wallet_Load_eventChannel() {
     return eventChannel((emit) => {
 
-        load().then(async rxdb => {
+        load()
+            .then(async rxdb => {
 
-            //await rxdb.wallet.find().remove();
+                //await rxdb.wallet.find().remove();
 
-            const wallet = await rxdb.wallet.find().exec();
+                const wallet = await rxdb.wallet.find().exec();
 
-            if (!wallet) {
-                emit(WalletError());
+                if (!wallet) {
+                    emit(WalletError());
+                    emit(END);
+                    return ;
+                }
+
+                if (!wallet.length) {
+                    emit(WalletMissing());
+                    emit(END);
+                    return ;
+                }
+
+                emit(WalletLoaded(new Wallet(wallet[0].privateKey)));
+                emit(ConfigLoad());
                 emit(END);
-                return ;
-            }
-
-            if (!wallet.length) {
-                emit(WalletMissing());
-                emit(END);
-                return ;
-            }
-
-            emit(WalletLoaded(new Wallet(wallet[0].privateKey)));
-            emit(ConfigLoad());
-            emit(END);
-        });
+            })
+            .catch(e => {
+                console.log(e);
+            });
         return () => {};
     });
 }

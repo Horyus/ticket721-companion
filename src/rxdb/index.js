@@ -2,6 +2,7 @@ import RxDB from 'rxdb';
 RxDB.plugin(require('pouchdb-adapter-asyncstorage').default);
 
 import {walletSchema} from "./schemas/wallet";
+import {ticketsSchema} from "./schemas/tickets";
 
 const databaseName = 'ticket721companion';
 
@@ -21,6 +22,11 @@ export const load = () => {
             const walletCollection = await rxdb.collection({
                 name: 'wallet',
                 schema: walletSchema
+            });
+
+            const ticketsCollection = await rxdb.collection({
+                name: 'tickets',
+                schema: ticketsSchema
             });
 
             ok(rxdb);

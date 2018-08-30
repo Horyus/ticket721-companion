@@ -2,8 +2,9 @@ import React from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
 import {Container, Content, Grid, Col, Text} from 'native-base';
 import {connect} from 'react-redux';
-import Expo from 'expo';
 import {Loading} from "../loading";
+import {NotLinked} from "./not_linked";
+import {Profile} from "./profile";
 
 const styles = StyleSheet.create({
     contentview: {
@@ -28,50 +29,26 @@ const styles = StyleSheet.create({
 
 class _Home extends React.Component {
     render() {
-        switch (this.props.link.link.status) {
-            case 'WAITING':
+        switch (this.props.inet) {
+            case 'UNKNOWN':
                 return <Loading/>;
-            case 'LINKED':
+            case 'OFFLINE':
                 return (
-                    <Container>
-                        <Content>
-                            <View style={styles.contentview}>
-                                <Grid style={styles.grid}>
-                                    <Col>
-                                        <Text style={styles.text}>
-                                            You are Linked
-                                        </Text>
-                                        <Text style={styles.text}>
-                                            {this.props.wallet.wallet.address}
-                                        </Text>
-                                    </Col>
-                                </Grid>
-                            </View>
-                        </Content>
-                    </Container>
+                    <Profile/>
                 );
-            case 'NOT_LINKED':
-                return (
-                    <Container>
-                        <Content>
-                            <View style={styles.contentview}>
-                                <Grid style={styles.grid}>
-                                    <Col>
-                                        <Text style={styles.text}>
-                                            You are not Linked
-                                        </Text>
-                                        <Text style={styles.text}>
-                                            {this.props.wallet.wallet.address}
-                                        </Text>
-                                        <Text style={styles.text}>
-                                            {this.props.link.link.code}
-                                        </Text>
-                                    </Col>
-                                </Grid>
-                            </View>
-                        </Content>
-                    </Container>
-                );
+            case 'ONLINE':
+                switch (this.props.link.link.status) {
+                    case 'WAITING':
+                        return <Loading/>;
+                    case 'LINKED':
+                        return (
+                            <Profile/>
+                        );
+                    case 'NOT_LINKED':
+                        return (
+                            <NotLinked/>
+                        );
+                }
         }
     }
 }
@@ -80,8 +57,8 @@ const mapStateToProps = (state, ownProps) => {
     return {
         ...ownProps,
         wallet: state.wallet,
-        config: state.config,
-        link: state.links
+        link: state.links,
+        inet: state.config.inet
     }
 };
 
