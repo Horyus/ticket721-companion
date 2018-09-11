@@ -2,8 +2,8 @@ const Fs = require('fs');
 
 module.exports =
 {
-    API_URL: "http://172.20.10.3:8080",
-    BC_URL: 'http://172.20.10.3:8545',
+    API_URL: `http://${process.env.DEV_IP}:8080`,
+    BC_URL: `http://${process.env.DEV_IP}:8545`,
     T721HUB_ADDRESS: JSON.parse(Fs.readFileSync(process.env.DIST_PATH + '/contracts/Ticket721Hub.json').toString()).deployedAddress,
     T721HUB_ABI: JSON.parse(Fs.readFileSync(process.env.DIST_PATH + '/contracts/Ticket721Hub.json').toString()).abiDefinition,
     T721PU_ADDRESS: JSON.parse(Fs.readFileSync(process.env.DIST_PATH + '/contracts/Ticket721Public.json').toString()).deployedAddress,

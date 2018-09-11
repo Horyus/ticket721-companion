@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {StyleSheet} from 'react-native';
 import {withNavigation} from 'react-navigation';
 import {Container, Header, Left, Icon, Body, Title, Content, Button, Right, Text, View} from 'native-base';
+import {load} from "../../../../rxdb";
+import Expo from 'expo';
 
 const styles = StyleSheet.create({
     title: {
@@ -78,7 +80,12 @@ class _Settings extends React.Component {
                             null
                     }
                     <View style={styles.buttonview}>
-                        <Button rounded bordered danger onPress={() => {alert('TODO')}}><Text>reset companion</Text></Button>
+                        <Button rounded bordered danger onPress={() => {
+                            load().then(async (rxdb) => {
+                                await rxdb.wallet.find().remove();
+                                Expo.Util.reload();
+                            });
+                        }}><Text>reset companion</Text></Button>
                     </View>
                 </Content>
             </Container>

@@ -61,7 +61,6 @@ function* Link_Ethers_Check_Link_Channel(action) {
                             //TODO Something
                         })
                 } else if (Companion_Link) {
-                    console.log(Companion_Link.code);
                     emit(LinkEthersNotLinked(Companion_Link.code));
                     setTimeout(() => {
                         emit(LinkEthersCheckLink(false));

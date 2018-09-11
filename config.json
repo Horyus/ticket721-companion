@@ -1,5 +1,15 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+    "sdkVersion": "27.0.0",
+    "name": "Ticket721 Companion",
+    "icon": "./assets/icon/icon.png",
+    "version": "0.0.2",
+    "slug": "ticket721-companion",
+    "ios": {
+      "bundleIdentifier": "com.horyus.ticket721.companion"
+    },
+    "android": {
+      "package": "com.horyus.ticket721.companion"
+    }
   }
 }
