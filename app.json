@@ -12,8 +12,8 @@
       "package": "com.horyus.ticket721.companion"
     },
     "extra": {
-      "API_URL": "http://192.168.0.180:8080",
-      "BC_URL": "http://192.168.0.180:8545",
+      "API_URL": "http://192.168.1.7:8080",
+      "BC_URL": "http://192.168.1.7:8545",
       "T721HUB_ADDRESS": "0xD72bF69ef58467B7fe2b833A3850430b15a46B3a",
       "T721HUB_ABI": [
         {
@@ -508,6 +508,26 @@
           "signature": "0x34ec740a"
         },
         {
+          "constant": true,
+          "inputs": [
+            {
+              "name": "_token_id",
+              "type": "uint256"
+            }
+          ],
+          "name": "isSaleOpen",
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function",
+          "signature": "0x4044556d"
+        },
+        {
           "constant": false,
           "inputs": [
             {
@@ -933,7 +953,7 @@
               "type": "address"
             },
             {
-              "indexed": false,
+              "indexed": true,
               "name": "_token_id",
               "type": "uint256"
             }
@@ -947,11 +967,29 @@
           "inputs": [
             {
               "indexed": true,
+              "name": "_owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "_token_id",
+              "type": "uint256"
+            }
+          ],
+          "name": "CloseSale",
+          "type": "event",
+          "signature": "0xd620608bd8229f655e280e25ab6d2854da9c3375d79f28ec46bd6eaad75d0fb1"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
               "name": "_buyer",
               "type": "address"
             },
             {
-              "indexed": false,
+              "indexed": true,
               "name": "_token_id",
               "type": "uint256"
             }
@@ -985,11 +1023,16 @@
               "indexed": true,
               "name": "_controller",
               "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "_id",
+              "type": "uint256"
             }
           ],
           "name": "Mint",
           "type": "event",
-          "signature": "0xc5004d0de103a4ce335ec7dfbb178f69e81ecd773d402c331dafc66c465a020a"
+          "signature": "0xab8530f87dc9b59234c4623bf917212bb2536d647574c8e7e5da92c2ede0c9f8"
         },
         {
           "anonymous": false,
@@ -1283,6 +1326,26 @@
           "signature": "0x34ec740a"
         },
         {
+          "constant": true,
+          "inputs": [
+            {
+              "name": "_token_id",
+              "type": "uint256"
+            }
+          ],
+          "name": "isSaleOpen",
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function",
+          "signature": "0x4044556d"
+        },
+        {
           "constant": false,
           "inputs": [
             {
@@ -1708,7 +1771,7 @@
               "type": "address"
             },
             {
-              "indexed": false,
+              "indexed": true,
               "name": "_token_id",
               "type": "uint256"
             }
@@ -1722,11 +1785,29 @@
           "inputs": [
             {
               "indexed": true,
+              "name": "_owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "_token_id",
+              "type": "uint256"
+            }
+          ],
+          "name": "CloseSale",
+          "type": "event",
+          "signature": "0xd620608bd8229f655e280e25ab6d2854da9c3375d79f28ec46bd6eaad75d0fb1"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
               "name": "_buyer",
               "type": "address"
             },
             {
-              "indexed": false,
+              "indexed": true,
               "name": "_token_id",
               "type": "uint256"
             }
@@ -1760,11 +1841,16 @@
               "indexed": true,
               "name": "_controller",
               "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "_id",
+              "type": "uint256"
             }
           ],
           "name": "Mint",
           "type": "event",
-          "signature": "0xc5004d0de103a4ce335ec7dfbb178f69e81ecd773d402c331dafc66c465a020a"
+          "signature": "0xab8530f87dc9b59234c4623bf917212bb2536d647574c8e7e5da92c2ede0c9f8"
         },
         {
           "anonymous": false,
