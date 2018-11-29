@@ -55,7 +55,7 @@ class _Verifier extends React.Component {
     mnemonic_checker(text) {
         if (text === this.props.mnemonic[this.state.verified]) {
             Vibration.vibrate(50);
-            if (this.state.verified === 11) {
+            if (this.state.verified === 1) {
                 this.props.navigation.navigate('Ready');
             }
             this.setState({

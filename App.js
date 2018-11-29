@@ -28,14 +28,36 @@ import {walletReducers} from "./src/redux/wallet/wallet.reducers";
 import {walletSagas} from "./src/redux/wallet/wallet.sagas";
 import {WalletLoad} from "./src/redux/wallet/wallet.actions";
 
-const AppNavigator = createBottomTabNavigator(
+import {configReducers} from "./src/redux/config/config.reducers";
+import {ConfigLoad} from "./src/redux/config/config.actions";
+import {configSagas} from "./src/redux/config/config.sagas";
+
+import {linksReducers} from "./src/redux/links/links.reducers";
+import {linksSagas} from "./src/redux/links/links.sagas";
+
+import {DMReducers} from "./src/redux/data_manager/data_manager.reducers";
+import {DMSagas} from "./src/redux/data_manager/data_manager.sagas";
+
+import {Settings} from "./src/views/introduction/home/settings";
+import {QrCode} from "./src/views/introduction/home/qrcode";
+
+const AppNavigator = createStackNavigator(
     {
         Home: {
             screen: Home
+        },
+        Settings: {
+            screen: Settings
+        },
+        QrCode: {
+            screen: QrCode
         }
     },
     {
-        initialRouteName: 'Home'
+        initialRouteName: 'Home',
+        headerMode: 'none',
+        gesturesEnabled: false,
+        cardStyle: { backgroundColor: '#FFFFFF' }
     }
 );
 
@@ -90,7 +112,7 @@ const IntroNavigator = createStackNavigator(
             }
         },
         App: {
-            screen: Home,
+            screen: AppNavigator,
             navigationOptions: {
                 gesturesEnabled: false,
             }
@@ -110,6 +132,9 @@ const navReducer = createNavigationReducer(IntroNavigator);
 // Combining Navigation Reducer and Application Reducers
 const reducer = combineReducers({
     wallet: walletReducers,
+    config: configReducers,
+    links: linksReducers,
+    dm: DMReducers,
     nav: navReducer
 });
 
@@ -119,7 +144,10 @@ const sagaMiddleware = createSagaMiddleware();
 // Creating Saga Combination of Application Sagas
 function* sagas() {
     yield all([
-        fork(walletSagas)
+        fork(walletSagas),
+        fork(configSagas),
+        fork(linksSagas),
+        fork(DMSagas)
     ]);
 }
 
@@ -130,6 +158,10 @@ const navMiddleware = createReactNavigationReduxMiddleware("root", state => stat
 const Store = createStore(reducer, {
     wallet: {
         status: 'NONE'
+    },
+    config: {
+        inet: 'UNKNOWN',
+        env: {}
     }
 }, applyMiddleware(navMiddleware, sagaMiddleware));
 

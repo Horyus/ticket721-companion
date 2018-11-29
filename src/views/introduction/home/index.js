@@ -2,6 +2,9 @@ import React from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
 import {Container, Content, Grid, Col, Text} from 'native-base';
 import {connect} from 'react-redux';
+import {Loading} from "../loading";
+import {NotLinked} from "./not_linked";
+import {Profile} from "./profile";
 
 const styles = StyleSheet.create({
     contentview: {
@@ -26,30 +29,36 @@ const styles = StyleSheet.create({
 
 class _Home extends React.Component {
     render() {
-        return (
-            <Container>
-                <Content>
-                    <View style={styles.contentview}>
-                        <Grid style={styles.grid}>
-                            <Col>
-                                <Text style={styles.text}>
-                                    Home
-                                </Text>
-                                <Text style={styles.text}>
-                                    {this.props.wallet.wallet.address}
-                                </Text>
-                            </Col>
-                        </Grid>
-                    </View>
-                </Content>
-            </Container>);
+        switch (this.props.inet) {
+            case 'UNKNOWN':
+                return <Loading/>;
+            case 'OFFLINE':
+                return (
+                    <Profile/>
+                );
+            case 'ONLINE':
+                switch (this.props.link.link.status) {
+                    case 'WAITING':
+                        return <Loading/>;
+                    case 'LINKED':
+                        return (
+                            <Profile/>
+                        );
+                    case 'NOT_LINKED':
+                        return (
+                            <NotLinked/>
+                        );
+                }
+        }
     }
 }
 
 const mapStateToProps = (state, ownProps) => {
     return {
         ...ownProps,
-        wallet: state.wallet
+        wallet: state.wallet,
+        link: state.links,
+        inet: state.config.inet
     }
 };
 
